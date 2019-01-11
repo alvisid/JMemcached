@@ -3,11 +3,13 @@ package net.devstudy.jmemcached.exception.protocol.Model;
 import net.devstudy.jmemcached.exception.JMemcachedException;
 
 public enum Version {
-    ;
+    VERSION_0_0(0,0),
+    VERSION_1_0(1,0);
     private byte high;
     private byte low;
 
-    Version(byte high, byte low) {
+
+    Version(int high, int low) {
         this.high = (byte)(high & 0x7);
         this.low = (byte)(low & 0xF);
     }
@@ -21,7 +23,7 @@ public enum Version {
         throw new JMemcachedException("Unsupported byteCode for Version: " + byteCode);
     }
 
-    private byte getByteCode() {
+    public byte getByteCode() {
         return (byte)(low + (high << 4));
     }
 
