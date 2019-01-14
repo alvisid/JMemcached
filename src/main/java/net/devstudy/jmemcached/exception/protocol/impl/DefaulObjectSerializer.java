@@ -8,10 +8,10 @@ import java.io.*;
 public class DefaulObjectSerializer implements ObjectSerializer {
     @Override
     public byte[] toByteArray(Object object) {
-        if (object == null){
+        if (object == null) {
             return null;
         }
-        if (!(object instanceof Serializable)){
+        if (!(object instanceof Serializable)) {
             throw new JMemcachedException("Class " + object.getClass().getName() + " should implement java.io.Serializable interface");
         }
         try {
@@ -20,22 +20,22 @@ public class DefaulObjectSerializer implements ObjectSerializer {
             out.writeObject(object);
             out.flush();
             return byteArrayOutputStream.toByteArray();
-        } catch (IOException e){
-            throw new JMemcachedException("Can't convert object to bbyte array: " + e.getMessage(),e);
+        } catch (IOException e) {
+            throw new JMemcachedException("Can't convert object to bbyte array: " + e.getMessage(), e);
         }
 
     }
 
     @Override
-    public Object fromByteArray(byte[] array) {
-        if(array == null){
+    public static Object fromByteArray(byte[] array) {
+        if (array == null) {
             return null;
         }
         try {
             ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(array));
             return in.readObject();
-        } catch (IOException | ClassNotFoundException e){
-            throw new JMemcachedException("Can't convert byte array to object: " + e.getMessage(),e);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new JMemcachedException("Can't convert byte array to object: " + e.getMessage(), e);
         }
     }
 

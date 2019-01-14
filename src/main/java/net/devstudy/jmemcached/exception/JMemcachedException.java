@@ -1,6 +1,6 @@
 package net.devstudy.jmemcached.exception;
 
-public class JMemcachedException extends RuntimeException{
+public class JMemcachedException extends RuntimeException {
     public JMemcachedException(String message) {
         super(message);
     }

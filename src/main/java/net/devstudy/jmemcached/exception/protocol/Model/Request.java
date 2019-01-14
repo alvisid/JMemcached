@@ -2,15 +2,16 @@ package net.devstudy.jmemcached.exception.protocol.Model;
 
 import java.util.Date;
 
-public class Request  extends AbstractPackage{
+public class Request extends AbstractPackage {
     private final Command command;
     private String key;
     private Long ttl;
 
-    public Request(Command command){
+    public Request(Command command) {
         this.command = command;
     }
-    public Request(Command command, String key, Long ttl, byte[] data){
+
+    public Request(Command command, String key, Long ttl, byte[] data) {
         super(data);
         this.command = command;
         this.key = key;
@@ -42,24 +43,24 @@ public class Request  extends AbstractPackage{
         this.ttl = ttl;
     }
 
-    public boolean hasKey(){
+    public boolean hasKey() {
         return key != null;
     }
 
-    public boolean hasTtl(){
+    public boolean hasTtl() {
         return ttl != null;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder s = new StringBuilder(getCommand().name());
-        if(hasKey()){
+        if (hasKey()) {
             s.append('[').append(getKey()).append(']');
         }
-        if(hasData()){
+        if (hasData()) {
             s.append("-").append(getData().length).append(" bytes");
         }
-        if (hasTtl()){
+        if (hasTtl()) {
             s.append(" (").append(new Date(ttl)).append(')');
         }
         return s.toString();

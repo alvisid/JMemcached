@@ -15,7 +15,7 @@ public class DefaultResponseConverter extends AbstractPackageConverter implement
         byte status = dataInputStream.readByte();
         Response response = new Response(Status.valueOf(status));
         byte flags = dataInputStream.readByte();
-        if (flags == 1){
+        if (flags == 1) {
             int dataLength = dataInputStream.readInt();
             response.setData(IOUtils.readFully(dataInputStream, dataLength));
         }
@@ -28,7 +28,7 @@ public class DefaultResponseConverter extends AbstractPackageConverter implement
         dataOutputStream.writeByte(getVersionByte());
         dataOutputStream.writeByte(response.getStatus().getByteCode());
         dataOutputStream.writeByte(response.hasData() ? 1 : 0);
-        if (response.hasData()){
+        if (response.hasData()) {
             dataOutputStream.writeInt(response.getData().length);
             dataOutputStream.write(response.getData());
         }
